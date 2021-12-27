@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <!-- 주소창에 http://localhost:3000/users/login/an/0510 -->
+    <% if(username) { %>
+      <div>Welcome <%= username %></div>
+    <% } else { %> 
+      <div>login fail</div>
+    <% } %>
+  </body>
+</html>
