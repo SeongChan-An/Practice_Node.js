@@ -127,3 +127,11 @@ image, js, css등 리소스 저장
 요청된 자원을 수정(UPDATE)
 - DELETE  
 요청된 자원을 삭제(DELETE)
+
+## Middleware  
+> 비즈니스 로직을 클라이언트와 DBMS사이의 미들웨어 서버에서 동작하도록 함으로써 클라이언트는 입력과 출력만 담당하도록 함.  
+
+출처 : [velog:웹서버의 동작](https://velog.io/@leesg619/%EC%9B%B9%EC%84%9C%EB%B2%84%EC%9D%98%EB%8F%99%EC%9E%91)
+
+어떠한 공통적인 요소에 대해 미들웨어서 처리함  
+ex) create, read, update, delete 를 하기위해 logincheck 가 필요할 때 요청과 응답사이의 위치해서 logincheck에 처리

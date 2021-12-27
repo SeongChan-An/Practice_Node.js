@@ -1,19 +1,21 @@
 var express = require('express');
-const { route } = require('./exam_index');
 var router = express.Router();
 
-let arr = [];
+const loginCheck = require("../module/loginCheck.js")
+const upload = require("../module/imageUpload");
 
-// GET method
-router.get("/read", (req,res) => {
+router.get("/", loginCheck, (req, res) => {
   res.status(200).json({
-    message: "read success",
+    message: "login success",
   });
 });
 
-// POST method
-router.post("/create", (req, res) => {
-  console.log(req.body);
-})
+router.post("/upload", upload.single("image"), (req, res) => {
+  const file = req.file;
+  console.log(file);
+  res.status(200).json({
+    message: "upload sucess !",
+  })
+});
 
 module.exports = router;

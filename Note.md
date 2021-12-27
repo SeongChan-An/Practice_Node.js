@@ -29,6 +29,14 @@
 - nodemon (-D 옵션을 통해 설치)
   >nodemon ./bin/www  
   을 통해 서버를 on/off 할 필요 없이 변경사항을 바로 확인 할 수 있도록 함.
+- npm install multer  
+  >upload.single("image");
+  파일을 업로드할 때 유용한 패키지  
+: 파일 업로드 방식을 upload에 저장  
+: 파일 1개 업로드, image라는 FormData 전송
+
+업로드 된 파일은 req.file  
+나머지 요청 데이터는 req.body 에 담아진다.
 
 ## 참고 문법  
 ```jsx

@@ -19,6 +19,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 간단한 middleware 함수 추가
+// 어떠한 요청이 들어와도 아래 함수가 실행
+// app.use((req, res, next) => {
+//   console.log("Middleware!");
+//   next();
+// })
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
