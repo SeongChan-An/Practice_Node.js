@@ -1,5 +1,15 @@
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const storage = multer.diskStorage({
+  destination : (req, file, callback) => {
+    callback(null, "public/images/");
+  }, 
+  filename: (req, file, callback) => {
+    callback(null, file.originalname);
+  },
+});
+
+// const upload = multer({ dest: "uploads/" });
+const upload = multer({ storage: storage });
 
 
 
