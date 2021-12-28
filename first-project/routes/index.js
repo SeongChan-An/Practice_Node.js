@@ -1,21 +1,97 @@
 var express = require('express');
 var router = express.Router();
 
-const loginCheck = require("../module/loginCheck.js")
-const upload = require("../module/imageUpload");
+const postModel = require("../model/post");
 
-router.get("/", loginCheck, (req, res) => {
-  res.status(200).json({
-    message: "login success",
+router.post("/", async (req, res) => {
+  const { title, content } = req.body;
+  const post = new postModel({
+    title: title,
+    content: content,
   });
+  // error handling
+  try {
+    // 비동기로 동작하기 때문에 async, await를 사용해야함
+  const result = await post.save();
+  res.status(200).json({
+    message: "Upload sucess",
+    data : result,
+  });
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+    });
+  }  
 });
 
-router.post("/upload", upload.single("image"), (req, res) => {
-  const file = req.file;
-  console.log(file);
-  res.status(200).json({
-    message: "upload sucess !",
-  })
+router.get("/", async (req, res) => {
+  try {
+    const result = await postModel.find({})
+    res.status(200).json({
+      message: "read success",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+    });
+  }
 });
+
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await postModel.findById(id);
+    res.status(200).json({
+      message: "detail success!",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+    });
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+
+  try {
+    // id 값으로 data를 찾고 업데이트 시킴
+    const result = await postModel.findByIdAndUpdate(
+      id,
+      {
+        title : title,
+        content: content,
+      }, 
+      {
+        new : true,
+      }
+    );
+    res.status(200).json({
+      message: "update success",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+    });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await postModel.findByIdAndDelete(id);
+    res.status(200).json({
+      message: "delete success~!",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+    });
+  }
+})
 
 module.exports = router;

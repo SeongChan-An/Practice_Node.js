@@ -13,6 +13,7 @@ const dbConfig = require("../config/dbConfig.json");
 /**
  * Get port from environment and store in Express.
  */
+
 // mongoose 연결
 const mongoose = require("mongoose");
 const db = mongoose.connection;
@@ -23,7 +24,7 @@ db.once("open", () => {
 
 mongoose.connect(
   `mongodb+srv://${dbConfig.id}:${dbConfig.pw}@${dbConfig.dbName}.cf4iw.mongodb.net/${dbConfig.projectName}?retryWrites=true&w=majority`,
-  {useNewUrlParser: true, useUnifiedTopology: true }
+  {useNewUrlParser: true, useUnifiedTopology: true}
   );
 
 var port = normalizePort(process.env.PORT || '3000');
